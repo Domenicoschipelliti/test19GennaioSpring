@@ -10,12 +10,12 @@ import java.util.UUID;
 public class Dispositivo {
     @Id
     @GeneratedValue
-    private UUID dispositivoId;
+    private UUID idDispositivo;
     public String nomeDispositivo;
-    private String disponibile="disponibile";
-    private String dismesso="dismesso";
-    private  String manutenzione="manutenzione";
-    private String assegnato="assegnato";
+    private String disponibile="";
+    private String dismesso="";
+    private  String manutenzione="";
+    private String assegnato="";
     @ManyToOne
     @JoinColumn(name = "utente_id")
     private Utente utente;
