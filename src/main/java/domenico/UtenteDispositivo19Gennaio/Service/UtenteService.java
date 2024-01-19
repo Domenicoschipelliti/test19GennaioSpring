@@ -36,15 +36,32 @@ public class UtenteService {
 
     //GET
     public Page<Utente> findAll(int size,int page,String order){
-        Pageable impaginazione= PageRequest.of(size,page,Sort.by(order))
+        Pageable impaginazione= PageRequest.of(size,page,Sort.by(order));
 
         return utenteDao.findAll(impaginazione);
     }
 
     //GET/PUT/PATCH
-    public Utente utenteIdTrovato(UUID id){
-        return utenteDao.findById(id).orElseThrow(()->new UtenteNonTrovato(id));
+    public Utente utenteIdTrovato(UUID utenteId){
+        return utenteDao.findById(utenteId).orElseThrow(()->new UtenteNonTrovato(utenteId));
     }
+
+    //PUT
+    public Utente utenteAggiornato(UUID utenteId,Utente utenteSet){
+        Utente aggiornamento=this.utenteIdTrovato(utenteId);
+        aggiornamento.setName(utenteSet.getName());
+        aggiornamento.setSurname(utenteSet.getSurname());
+        aggiornamento.setEmail(utenteSet.getEmail());
+        return utenteDao.save(aggiornamento);
+    }
+
+
+    //DELETE
+    public void  utenteCancellato(UUID utenteId){
+       Utente cancellazione=this.utenteIdTrovato(utenteId);
+       utenteDao.delete(cancellazione);
+    }
+
 
 
 

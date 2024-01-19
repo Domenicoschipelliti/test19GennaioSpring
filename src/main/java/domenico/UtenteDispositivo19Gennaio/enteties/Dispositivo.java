@@ -11,7 +11,7 @@ public class Dispositivo {
     @Id
     @GeneratedValue
     private UUID dispositivoId;
-
+    public String nomeDispositivo;
     private String disponibile="disponibile";
     private String dismesso="dismesso";
     private  String manutenzione="manutenzione";
@@ -49,5 +49,9 @@ public class Dispositivo {
 
     public void setUtente(Utente utente) {
         this.utente = utente;
+    }
+
+    public void setNomeDispositivo(String nomeDispositivo) {
+        this.nomeDispositivo = nomeDispositivo;
     }
 }
