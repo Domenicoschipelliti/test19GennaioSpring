@@ -20,7 +20,7 @@ public class GestoreErrori {
 
   @ExceptionHandler(BadRequest.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public ErroriPossibili handleBadRequest(BadRequest e) {
+  public ErroriPossibili erroriPossibili(BadRequest e) {
     List<String> messagiErronei = new ArrayList<>();
     if (e.getErroriPost() != null)
       messagiErronei = e.getErroriPost().stream().map(err -> err.getDefaultMessage()).toList();
