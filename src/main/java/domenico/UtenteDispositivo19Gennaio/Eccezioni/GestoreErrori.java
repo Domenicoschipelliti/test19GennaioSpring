@@ -3,7 +3,6 @@ package domenico.UtenteDispositivo19Gennaio.Eccezioni;
 
 import domenico.UtenteDispositivo19Gennaio.Errori.ErroriPossibili;
 import domenico.UtenteDispositivo19Gennaio.Errori.ErroriPossibili2;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 

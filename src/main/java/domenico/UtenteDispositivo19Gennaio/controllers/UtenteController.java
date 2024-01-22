@@ -22,9 +22,10 @@ public class UtenteController {
     UtenteService utenteService;
     //GET
     @GetMapping
-    public Page<Utente> getUtenti(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "20")int size,@RequestParam(defaultValue = "id")String order){
+    public Page<Utente> getUtenti(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "20")int size,@RequestParam(defaultValue = "userId")String order){
        return utenteService.findAll(page,size,order);
     }
+
     //GET(ID)
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -34,7 +35,7 @@ public class UtenteController {
 
      //POST
      @PostMapping
-     public Utente postDispositivo(@RequestBody @Validated UtenteDTO utenteBody, BindingResult validazione){
+     public Utente postUtente(@RequestBody @Validated UtenteDTO utenteBody, BindingResult validazione){
          if (validazione.hasErrors()){
              throw new BadRequest(validazione.getAllErrors());
          }

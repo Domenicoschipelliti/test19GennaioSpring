@@ -26,6 +26,8 @@ public class UtenteService {
 
         utenteSalvato.setName(utenteDTO.name());
         utenteSalvato.setSurname(utenteDTO.surname());
+        utenteSalvato.setEmail(utenteDTO.email());
+        utenteSalvato.setUsername(utenteDTO.username());
 
         //da annotare di fare il set email che ci servirà mailgun
         //da fare upload immagini per l'utente

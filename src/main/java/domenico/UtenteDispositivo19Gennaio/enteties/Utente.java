@@ -11,12 +11,14 @@ import java.util.UUID;
 public class Utente {
    @Id
    @GeneratedValue
-    private UUID userId;
+   private UUID userId;
 
     private String username;
+
     private String name;
 
     private String surname;
+
     private String email;
 
     @OneToMany(mappedBy = "utente")
@@ -52,4 +54,6 @@ public class Utente {
     public void setDispositivo(List<Dispositivo> dispositivo) {
         this.dispositivo = dispositivo;
     }
+
+
 }
