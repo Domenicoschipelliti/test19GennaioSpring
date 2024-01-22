@@ -25,6 +25,13 @@ public class GestoreErrori {
       messagiErronei = e.getErroriPost().stream().map(err -> err.getDefaultMessage()).toList();
     return new ErroriPossibili(e.getMessage(), LocalDate.now(), messagiErronei);
   }
+
+
+  @ExceptionHandler
+  @ResponseStatus(HttpStatus.UNAUTHORIZED)
+  public ErroriPossibili2 nonAutorizzato(Errore401 errore401){
+    return  new ErroriPossibili2(errore401.getMessage(),LocalDate.now());
+  }
   @ExceptionHandler(UtenteNonTrovato.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public ErroriPossibili2 erroriPossibili2Utente(UtenteNonTrovato e) {
