@@ -43,7 +43,7 @@ public class DispoService {
          Dispositivo aggiornamentoDisp=this.ritornaUnicoDispositivo(idDispositivo);
          aggiornamentoDisp.setNomeDispositivo(bodyDispositivo.nomeDispositivo);
          aggiornamentoDisp.setAssegnato(bodyDispositivo.getAssegnato());
-         aggiornamentoDisp.setAssegnato(bodyDispositivo.getAssegnato());
+         aggiornamentoDisp.setManutenzione(bodyDispositivo.getManutenzione());
          aggiornamentoDisp.setDismesso(bodyDispositivo.getDismesso());
          aggiornamentoDisp.setDisponibile(bodyDispositivo.getDisponibile());
          return  dispositivoDao.save(aggiornamentoDisp);
