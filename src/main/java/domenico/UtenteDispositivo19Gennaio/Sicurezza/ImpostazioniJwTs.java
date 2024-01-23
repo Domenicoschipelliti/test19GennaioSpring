@@ -1,5 +1,6 @@
 package domenico.UtenteDispositivo19Gennaio.Sicurezza;
 
+import domenico.UtenteDispositivo19Gennaio.Eccezioni.Errore401;
 import domenico.UtenteDispositivo19Gennaio.enteties.Utente;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -19,6 +20,19 @@ public class ImpostazioniJwTs {
              .signWith(Keys.hmacShaKeyFor(codiceSegreto.getBytes())).compact();//immissione del codice segreto e fine.
    }
 
-   public void verificaToken(){}
+   public void verificaToken(String token){
+       try {
+           Jwts.parser().verifyWith(Keys.hmacShaKeyFor(codiceSegreto.getBytes())).build().parse(token);
+       } catch (Exception ex) {
+           throw new Errore401("Il token sembra non sia valido riprova a loggarti");
+       }
+   }
+
+    public String extractIdFromToken(String token) {
+        return Jwts.parser()
+                .verifyWith(Keys.hmacShaKeyFor(codiceSegreto.getBytes()))
+                .build()
+                .parseSignedClaims(token).getPayload().getSubject();
+    }
 
 }

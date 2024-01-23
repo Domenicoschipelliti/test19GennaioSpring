@@ -1,5 +1,6 @@
 package domenico.UtenteDispositivo19Gennaio.controllers;
 
+import domenico.UtenteDispositivo19Gennaio.Dto.NuovoUtenteRisposta;
 import domenico.UtenteDispositivo19Gennaio.Dto.UtenteDTO;
 import domenico.UtenteDispositivo19Gennaio.Eccezioni.BadRequest;
 import domenico.UtenteDispositivo19Gennaio.Service.UtenteService;
@@ -33,14 +34,8 @@ public class UtenteController {
         return utenteService.utenteIdTrovato(id);
      }
 
-     //POST
-     @PostMapping
-     public Utente postUtente(@RequestBody @Validated UtenteDTO utenteBody, BindingResult validazione){
-         if (validazione.hasErrors()){
-             throw new BadRequest(validazione.getAllErrors());
-         }
-         return utenteService.save(utenteBody);
-     }
+
+
 
     //PUT(ID+BODY)
     @PutMapping("/{id}")

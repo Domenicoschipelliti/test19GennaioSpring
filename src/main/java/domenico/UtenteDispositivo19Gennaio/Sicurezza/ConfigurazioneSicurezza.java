@@ -16,7 +16,7 @@ public class ConfigurazioneSicurezza {
 
         cambioDiSicurezza.formLogin(AbstractHttpConfigurer::disable);//disabilitazione del login di default di spring security
         cambioDiSicurezza.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));//interruzioni delle sessioni
-        cambioDiSicurezza.csrf(AbstractHttpConfigurer::disable);
+        cambioDiSicurezza.csrf(AbstractHttpConfigurer::disable);//sistema di protezione della comunicazione tra back e front end.
 
         cambioDiSicurezza.authorizeHttpRequests(richiesta->richiesta.requestMatchers("/**").permitAll());
 
