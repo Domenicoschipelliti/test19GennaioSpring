@@ -1,5 +1,6 @@
 package domenico.UtenteDispositivo19Gennaio.Service;
 
+import domenico.UtenteDispositivo19Gennaio.Dto.NuovoUtenteDto;
 import domenico.UtenteDispositivo19Gennaio.Dto.UtenteDTO;
 import domenico.UtenteDispositivo19Gennaio.Eccezioni.UtenteNonTrovato;
 import domenico.UtenteDispositivo19Gennaio.InterfaceDao.UtenteDao;
@@ -20,15 +21,14 @@ public class UtenteService {
     UtenteDao utenteDao;
 
     //POST
-    public Utente save(UtenteDTO utenteDTO){
+    public Utente save(NuovoUtenteDto utenteDTO){
 
         Utente utenteSalvato=new Utente();
 
         utenteSalvato.setName(utenteDTO.name());
         utenteSalvato.setSurname(utenteDTO.surname());
         utenteSalvato.setEmail(utenteDTO.email());
-        utenteSalvato.setUsername(utenteDTO.username());
-
+        utenteSalvato.setPassword(utenteDTO.password());
         //da annotare di fare il set email che ci servirà mailgun
         //da fare upload immagini per l'utente
 

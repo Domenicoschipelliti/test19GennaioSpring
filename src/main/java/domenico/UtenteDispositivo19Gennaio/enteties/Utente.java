@@ -54,6 +54,10 @@ public class Utente {
         this.email = email;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setDispositivo(List<Dispositivo> dispositivo) {
         this.dispositivo = dispositivo;
     }
