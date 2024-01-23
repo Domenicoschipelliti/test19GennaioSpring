@@ -8,6 +8,7 @@ import domenico.UtenteDispositivo19Gennaio.enteties.Utente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +24,14 @@ public class UtenteController {
     UtenteService utenteService;
     //GET
     @GetMapping
+    @PreAuthorize("hasAuthority(ADMIN)")
     public Page<Utente> getUtenti(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "20")int size,@RequestParam(defaultValue = "userId")String order){
        return utenteService.findAll(page,size,order);
     }
 
     //GET(ID)
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority(ADMIN)")
     @ResponseStatus(HttpStatus.OK)
     public Utente utenteId(@PathVariable UUID id){
         return utenteService.utenteIdTrovato(id);
@@ -39,6 +42,7 @@ public class UtenteController {
 
     //PUT(ID+BODY)
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority(ADMIN)")
     public Utente utentePut(@PathVariable UUID id,@RequestBody Utente utenteBody ){
         return utenteService.utenteAggiornato(id,utenteBody);
     }
@@ -47,6 +51,7 @@ public class UtenteController {
     //DELETE(ID)
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAuthority(ADMIN)")
     public void utenteDelete(@PathVariable UUID id){
         utenteService.utenteCancellato(id);
     }

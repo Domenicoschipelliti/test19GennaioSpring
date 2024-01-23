@@ -1,14 +1,19 @@
 package domenico.UtenteDispositivo19Gennaio.enteties;
 
+import domenico.UtenteDispositivo19Gennaio.Enum.Ruoli;
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Getter
-public class Utente {
+public class Utente implements UserDetails {
    @Id
    @GeneratedValue
    private UUID userId;
@@ -23,15 +28,19 @@ public class Utente {
 
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Ruoli ruoli;
+
     @OneToMany(mappedBy = "utente")
     private List<Dispositivo> dispositivo;
 
-    public Utente(String username, String name, String surname, String email,String password) {
+    public Utente(String username, String name, String surname, String email,String password,Ruoli ruoli) {
         this.username = username;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password=password;
+        this.ruoli=ruoli;
     }
 
     public Utente(){
@@ -63,4 +72,28 @@ public class Utente {
     }
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of( new SimpleGrantedAuthority(this.ruoli.name())); //si occupa di recuperare tutti i ruoli disponibili nell'enum
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

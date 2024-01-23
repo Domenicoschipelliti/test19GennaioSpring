@@ -38,7 +38,8 @@ public class JwTsFiltro extends OncePerRequestFilter {
             String codiceUnivoco = JwTs.extractIdFromToken(header);
             Utente utente = utenteService.utenteIdTrovato(UUID.fromString(codiceUnivoco));
 
-            Authentication autenticazione = new UsernamePasswordAuthenticationToken(utente, null);
+            Authentication autenticazione = new UsernamePasswordAuthenticationToken(utente, null,utente.getAuthorities());
+            //getAuthorities serve qui per attivare il processo di autorizzazione
             SecurityContextHolder.getContext().setAuthentication(autenticazione);
 
             filterChain.doFilter(request, response);

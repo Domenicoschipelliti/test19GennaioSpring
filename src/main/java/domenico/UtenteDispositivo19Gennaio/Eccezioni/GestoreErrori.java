@@ -32,6 +32,13 @@ public class GestoreErrori {
   public ErroriPossibili2 nonAutorizzato(Errore401 errore401){
     return  new ErroriPossibili2(errore401.getMessage(),LocalDate.now());
   }
+
+  @ExceptionHandler
+  @ResponseStatus(HttpStatus.FORBIDDEN)
+  public ErroriPossibili2 accessoNegato(AccessoNegato accessoNegato){
+    return new ErroriPossibili2("accesso negato riprova a fare il login",LocalDate.now());
+  }
+
   @ExceptionHandler(UtenteNonTrovato.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public ErroriPossibili2 erroriPossibili2Utente(UtenteNonTrovato e) {
