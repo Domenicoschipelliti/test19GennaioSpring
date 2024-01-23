@@ -20,21 +20,8 @@ public class UtenteService {
     @Autowired
     UtenteDao utenteDao;
 
-    //POST
-    public Utente save(NuovoUtenteDto utenteDTO){
 
-        Utente utenteSalvato=new Utente();
 
-        utenteSalvato.setName(utenteDTO.name());
-        utenteSalvato.setSurname(utenteDTO.surname());
-        utenteSalvato.setEmail(utenteDTO.email());
-        utenteSalvato.setPassword(utenteDTO.password());
-        //da annotare di fare il set email che ci servirà mailgun
-        //da fare upload immagini per l'utente
-
-       return  utenteDao.save(utenteSalvato);
-
-    }
 
     //GET
     public Page<Utente> findAll(int size,int page,String order){

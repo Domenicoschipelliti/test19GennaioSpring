@@ -1,5 +1,6 @@
 package domenico.UtenteDispositivo19Gennaio.enteties;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import domenico.UtenteDispositivo19Gennaio.Enum.Ruoli;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
+@JsonIgnoreProperties({"password", "authorities", "accountNonExpired", "enabled", "accountNonLocked", "credentialsNonExpired", "username"})
 public class Utente implements UserDetails {
    @Id
    @GeneratedValue
@@ -67,6 +69,10 @@ public class Utente implements UserDetails {
         this.password = password;
     }
 
+    public void setRuoli(Ruoli ruoli) {
+        this.ruoli = ruoli;
+    }
+
     public void setDispositivo(List<Dispositivo> dispositivo) {
         this.dispositivo = dispositivo;
     }
@@ -96,4 +102,6 @@ public class Utente implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

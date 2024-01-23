@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sicurezza")
 public class SicurezzaController {
 
-    @Autowired
-    private UtenteService utenteService;
+
 
     @Autowired
     private SicurezzaService sicurezzaService;
@@ -34,7 +33,7 @@ public class SicurezzaController {
         if (validazione.hasErrors()){
             throw new BadRequest(validazione.getAllErrors());
         }
-        Utente ute=utenteService.save(utenteBody);
+        Utente ute=sicurezzaService.save(utenteBody);
         return new NuovoUtenteRisposta(ute.getUserId());
     }
 }
