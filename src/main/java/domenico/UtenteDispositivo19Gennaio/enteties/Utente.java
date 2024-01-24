@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import domenico.UtenteDispositivo19Gennaio.Enum.Ruoli;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,27 +15,30 @@ import java.util.UUID;
 
 @Entity
 @Getter
+@ToString
 @JsonIgnoreProperties({"password", "authorities", "accountNonExpired", "enabled", "accountNonLocked", "credentialsNonExpired", "username"})
 public class Utente implements UserDetails {
    @Id
    @GeneratedValue
    private UUID userId;
 
-    private String username;
+   private String username;
 
-    private String name;
+   private String name;
 
-    private String surname;
+   private String surname;
 
-    private String email;
+   private String email;
 
-    private String password;
+   private String password;
 
-    @Enumerated(EnumType.STRING)
-    private Ruoli ruoli;
+   @Enumerated(EnumType.STRING)
+   private Ruoli ruoli;
 
-    @OneToMany(mappedBy = "utente")
-    private List<Dispositivo> dispositivo;
+   @OneToMany(mappedBy = "utente")
+   private List<Dispositivo> dispositivo;
+
+   
 
     public Utente(String username, String name, String surname, String email,String password,Ruoli ruoli) {
         this.username = username;
@@ -101,6 +105,11 @@ public class Utente implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
     }
 
 

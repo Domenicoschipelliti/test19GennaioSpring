@@ -29,7 +29,7 @@ public class JwTsFiltro extends OncePerRequestFilter {
 
         String header=request.getHeader("Authorization");
 
-        if (header==null){
+        if (header==null || !header.startsWith("Bearer ")){
           throw  new Errore401("errore ci si aspetta il campo pieno");
         }else {
             String allaccessoToken=header.substring(7);

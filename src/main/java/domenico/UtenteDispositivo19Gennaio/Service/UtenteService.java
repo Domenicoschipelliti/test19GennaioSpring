@@ -52,8 +52,8 @@ public class UtenteService {
     }
 
 
-    public Utente verificaEmail(String email) throws UtenteNonTrovato {
-        return utenteDao.verificaEmail(email).orElseThrow(() -> new UtenteNonTrovato("Utente con email " + email + " non trovata!"));
+    public Utente cercaEmail(String email) throws UtenteNonTrovato {
+        return utenteDao.findByEmail(email).orElseThrow(() -> new UtenteNonTrovato("Utente con email " + email + " non trovata!"));
     }
 
 

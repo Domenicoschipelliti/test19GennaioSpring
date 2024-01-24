@@ -22,7 +22,7 @@ public class SicurezzaController {
 
     @PostMapping("/login")
     public UtenteLoginRisposta login(@RequestBody UtenteLogin utenteLogin){
-       String tokenAccesso=sicurezzaService.autentixazioneUtente(utenteLogin);
+       String tokenAccesso=sicurezzaService.autenticazioneUtente(utenteLogin);
        return new UtenteLoginRisposta(tokenAccesso);
     }
 

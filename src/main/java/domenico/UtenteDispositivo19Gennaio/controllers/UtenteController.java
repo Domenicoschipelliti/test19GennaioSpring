@@ -25,14 +25,14 @@ public class UtenteController {
     UtenteService utenteService;
     //GET
     @GetMapping
-    @PreAuthorize("hasAuthority(ADMIN)")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Page<Utente> getUtenti(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "20")int size,@RequestParam(defaultValue = "userId")String order){
        return utenteService.findAll(page,size,order);
     }
 
     //GET(ID)
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority(ADMIN)")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     public Utente utenteId(@PathVariable UUID id){
         return utenteService.utenteIdTrovato(id);
@@ -43,7 +43,7 @@ public class UtenteController {
 
     //PUT(ID+BODY)
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority(ADMIN)")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Utente utentePut(@PathVariable UUID id,@RequestBody Utente utenteBody ){
         return utenteService.utenteAggiornato(id,utenteBody);
     }

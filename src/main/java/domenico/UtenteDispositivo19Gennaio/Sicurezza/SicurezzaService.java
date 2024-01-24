@@ -4,6 +4,7 @@ package domenico.UtenteDispositivo19Gennaio.Sicurezza;
 import domenico.UtenteDispositivo19Gennaio.Dto.NuovoUtenteDto;
 import domenico.UtenteDispositivo19Gennaio.Dto.UtenteDTO;
 import domenico.UtenteDispositivo19Gennaio.Dto.UtenteLogin;
+import domenico.UtenteDispositivo19Gennaio.Eccezioni.BadRequest;
 import domenico.UtenteDispositivo19Gennaio.Eccezioni.Errore401;
 import domenico.UtenteDispositivo19Gennaio.Enum.Ruoli;
 import domenico.UtenteDispositivo19Gennaio.InterfaceDao.UtenteDao;
@@ -29,8 +30,8 @@ public class SicurezzaService {
 
 
 
-    public String autentixazioneUtente(UtenteLogin utente){
-        Utente utente1=utenteService.verificaEmail(utente.email());
+    public String autenticazioneUtente(UtenteLogin utente){
+        Utente utente1=utenteService.cercaEmail(utente.email());
       if (passwordEncoder.matches(utente1.getPassword(),utente.password())){
          return JwTs.tokenCreation(utente1);
       }else {
@@ -41,6 +42,10 @@ public class SicurezzaService {
     //POST
     public Utente save(NuovoUtenteDto utenteDTO){
 
+        utenteDao.findByEmail(utenteDTO.email()).ifPresent(utente->{
+            throw new BadRequest("l'email " +utente.getEmail()+" è già in uso");
+        });
+
         Utente utenteSalvato=new Utente();
 
         utenteSalvato.setName(utenteDTO.name());
@@ -48,6 +53,7 @@ public class SicurezzaService {
         utenteSalvato.setEmail(utenteDTO.email());
         utenteSalvato.setPassword(passwordEncoder.encode(utenteDTO.password()));
         utenteSalvato.setRuoli(Ruoli.UTENTE);
+
         //da annotare di fare il set email che ci servirà mailgun
         //da fare upload immagini per l'utente
 
